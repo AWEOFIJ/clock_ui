@@ -3,10 +3,10 @@
 **AIoT Personal Portal & Dynamic Timekeeper** — a zero-dependency single-page site that pairs a personal AIoT portal with a live clock calibrated against **Taiwan's national standard time** (stdtime.gov.tw).
 
 
-課程名稱：AIoT 與數據分析（AIoT & Data Analytics, AIoT-DA）
-課堂實作：DIC-1 (Do in Class 1) — 個人入口網站與動態時鐘儀表板（Personal Portal & Live Timekeeper）
-儲存庫網址：https://github.com/AWEOFIJ/clock_ui/
-Live Demo Page：https://aweofij.github.io/clock_ui/
+- 課程名稱：AIoT 與數據分析（AIoT & Data Analytics, AIoT-DA）
+- 課堂實作：DIC-1 (Do in Class 1) — 個人入口網站與動態時鐘儀表板（Personal Portal & Live Timekeeper）
+- 儲存庫網址：https://github.com/AWEOFIJ/clock_ui/
+- Live Demo Page：https://aweofij.github.io/clock_ui/
 
 Built as the Lecture 2 teaching reference for the AIoT course, it walks the whole client-side progression in one readable codebase:
 
