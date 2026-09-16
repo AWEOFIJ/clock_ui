@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>clock_ui • AWEOFIJ AIoT Personal Portal & Timekeeper</title>
+  <meta name="description" content="clock_ui: Personal portal and live dynamic timekeeper for AWEOFIJ, featuring AIoT project showcase, real-time weather, and ambient glassmorphic design.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="aurora">
+  <!-- Ambient Aurora Lighting Effects -->
+  <div class="ambient-glow orb-1" aria-hidden="true"></div>
+  <div class="ambient-glow orb-2" aria-hidden="true"></div>
+  <div class="ambient-glow orb-3" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <main class="app-container" id="app">
+    <!-- Top Bar Navigation & Context Controls -->
+    <header class="top-nav" id="topNav">
+      <!-- Live Environmental Weather Widget -->
+      <div class="weather-widget" id="weatherWidget">
+        <button class="weather-pill-btn" id="weatherPillBtn" title="Click to select city" aria-label="Select weather city" aria-haspopup="true">
+          <span class="weather-icon" id="weatherIcon">⛅</span>
+          <span class="weather-temp" id="weatherTemp">26°C</span>
+          <span class="weather-city-label" id="weatherCityLabel">Taichung</span>
+          <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <!-- City Selection Dropdown -->
+        <div class="city-dropdown" id="cityDropdown" role="menu">
+          <button class="city-option active" data-city="taichung">Taichung (台中)</button>
+          <button class="city-option" data-city="taipei">Taipei (台北)</button>
+          <button class="city-option" data-city="hsinchu">Hsinchu (新竹)</button>
+          <button class="city-option" data-city="tainan">Tainan (台南)</button>
+          <button class="city-option" data-city="kaohsiung">Kaohsiung (高雄)</button>
+        </div>
+      </div>
+
+      <!-- Quick Action Navigation Controls -->
+      <div class="nav-controls">
+        <!-- Ambient Sound Toggle (Web Audio API) -->
+        <button id="soundToggleBtn" class="icon-btn" title="Toggle clock tick sound" aria-label="Toggle clock sound">
+          <svg class="icon sound-off-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+          <svg class="icon sound-on-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <span class="btn-tooltip">Sound (Muted)</span>
+        </button>
+
+        <!-- Theme Switcher -->
+        <button id="themeToggleBtn" class="icon-btn" title="Cycle visual theme" aria-label="Cycle visual theme">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          </svg>
+          <span class="btn-tooltip" id="themeTooltip">Theme: Aurora</span>
+        </button>
+
+        <!-- Zen / Focus Mode Toggle -->
+        <button id="zenModeBtn" class="icon-btn" title="Toggle Zen Mode (Shortcut: Z)" aria-label="Toggle Zen mode">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+          <span class="btn-tooltip">Zen Mode (Z)</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Glass Hero Card -->
+    <section class="glass-card" id="mainCard">
+      <!-- Identity & Greeting Section -->
+      <div class="profile-header">
+        <div class="avatar-ring">
+          <div class="avatar-monogram" id="avatarInitials">AW</div>
+        </div>
+        <div class="profile-info">
+          <div class="greeting-badge" id="greetingBadge">
+            <span class="greeting-icon" id="greetingIcon">✨</span>
+            <span class="greeting-text" id="greetingText">Good evening</span>
+          </div>
+          <div class="name-wrapper">
+            <h1 class="user-name" id="userName" title="Click to edit name" tabindex="0">AWEOFIJ</h1>
+            <button class="edit-btn" id="editNameBtn" title="Edit name" aria-label="Edit name">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </button>
+          </div>
+          <p class="user-tagline" id="userTagline" title="Click to edit title" tabindex="0">AIoT Pioneer • Instructor</p>
+        </div>
+      </div>
+
+      <!-- Hero Dynamic Clock Display -->
+      <div class="clock-display-container">
+        <!-- National Standard Time Calibration Bar (stdtime.gov.tw) -->
+        <div class="sync-banner" id="syncBanner" title="Taiwan National Standard Time calibration (stdtime.gov.tw)">
+          <div class="sync-indicator">
+            <span class="sync-dot" id="syncDot"></span>
+            <span class="sync-label" id="syncStatusText">stdtime: Initializing...</span>
+          </div>
+          <div class="sync-metrics">
+            <span class="sync-pill" id="syncOffsetPill" title="Device Clock Offset relative to stdtime.gov.tw standard">Δ: 0.000s</span>
+            <span class="sync-pill" id="syncRttPill" title="Network Round-Trip Time">RTT: --ms</span>
+            <button class="sync-now-btn" id="syncNowBtn" title="Sync now with stdtime.gov.tw" aria-label="Calibrate with stdtime.gov.tw">
+              <svg class="sync-icon" id="syncIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+              </svg>
+              <span>Sync</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Digital Numbers -->
+        <div class="digital-clock" id="digitalClock" aria-live="polite">
+          <div class="time-block">
+            <span class="time-num" id="hours">20</span>
+            <span class="time-label">HOURS</span>
+          </div>
+          <span class="time-separator" id="colon1">:</span>
+          <div class="time-block">
+            <span class="time-num" id="minutes">15</span>
+            <span class="time-label">MINUTES</span>
+          </div>
+          <span class="time-separator" id="colon2">:</span>
+          <div class="time-block">
+            <span class="time-num" id="seconds">00</span>
+            <span class="time-label">SECONDS</span>
+          </div>
+          <div class="time-meridiem" id="meridiemContainer">
+            <span class="meridiem-tag" id="meridiem">PM</span>
+          </div>
+        </div>
+
+        <!-- High-Precision Subbar -->
+        <div class="clock-subbar">
+          <span class="epoch-label">UNIX: <span id="epochTime">1726500000</span></span>
+          <span class="divider-dot">•</span>
+          <span class="ms-label"><span id="milliseconds">000</span> ms</span>
+          <span class="divider-dot">•</span>
+          <span class="sync-source-label" id="syncSourceLabel">stdtime.gov.tw</span>
+        </div>
+      </div>
+
+      <!-- Date & Status Badges -->
+      <div class="calendar-strip">
+        <div class="date-full" id="fullDate">Wednesday, September 16, 2026</div>
+        <div class="date-badges">
+          <span class="date-pill" id="weekBadge">Week 38</span>
+          <span class="date-pill" id="dayOfYearBadge">Day 259</span>
+          <span class="date-pill" id="timezoneBadge">UTC+8</span>
+        </div>
+      </div>
+
+      <!-- Drawer Portals Navigation Bar -->
+      <nav class="portal-nav" aria-label="Sections Explorer">
+        <button class="portal-btn" id="openProjectsBtn" data-target-tab="projects">
+          <span class="portal-icon">📂</span>
+          <span class="portal-label">Projects</span>
+          <span class="portal-counter" id="projectsCount">4</span>
+        </button>
+        <button class="portal-btn" id="openAboutBtn" data-target-tab="about">
+          <span class="portal-icon">👤</span>
+          <span class="portal-label">About</span>
+        </button>
+        <button class="portal-btn" id="openConnectBtn" data-target-tab="connect">
+          <span class="portal-icon">🔗</span>
+          <span class="portal-label">Connect</span>
+        </button>
+      </nav>
+
+      <!-- Bottom Action Toolbar -->
+      <div class="toolbar" id="toolbar">
+        <div class="format-switcher">
+          <button class="toggle-pill active" id="btn24h" data-format="24">24H</button>
+          <button class="toggle-pill" id="btn12h" data-format="12">12H</button>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-btn" id="copyTimeBtn" title="Copy current timestamp (Shortcut: C)">
+            <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="copyBtnText">Copy Time</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide-Out Glass Drawer (Portfolio Explorer) -->
+    <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+    <aside class="drawer-panel" id="drawerPanel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <div class="drawer-header">
+        <div class="drawer-tabs">
+          <button class="drawer-tab active" data-tab="projects">Projects</button>
+          <button class="drawer-tab" data-tab="about">About</button>
+          <button class="drawer-tab" data-tab="connect">Connect</button>
+        </div>
+        <button class="close-drawer-btn" id="closeDrawerBtn" title="Close drawer (ESC)" aria-label="Close drawer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-content">
+        <!-- Projects View -->
+        <section class="tab-pane active" id="paneProjects">
+          <div class="pane-header">
+            <h2 class="pane-title" id="drawerTitle">Featured AIoT Works</h2>
+            <p class="pane-subtitle">Data loaded asynchronously from <code>projects.json</code></p>
+          </div>
+          <div class="projects-grid" id="projectsGrid">
+            <!-- Dynamically populated by app.js -->
+            <div class="loading-indicator">Loading projects...</div>
+          </div>
+        </section>
+
+        <!-- About View -->
+        <section class="tab-pane" id="paneAbout">
+          <div class="about-card">
+            <div class="about-bio">
+              <h3>AWEOFIJ</h3>
+              <p class="about-role">AIoT Researcher, Educator & Systems Architect</p>
+              <p class="about-desc">
+                Specializing in the intersection of Artificial Intelligence and Internet of Things. 
+                Focusing on real-time embedded Edge AI, TinyML microcontrollers, industrial telemetry, 
+                and bridging low-level hardware sensors with cloud-native dashboards.
+              </p>
+            </div>
+
+            <div class="about-section">
+              <h4>Research & Focus Areas</h4>
+              <div class="skills-tags">
+                <span class="skill-tag">Edge AI Vision</span>
+                <span class="skill-tag">TinyML (ESP32/C++)</span>
+                <span class="skill-tag">LoRaWAN & BLE Mesh</span>
+                <span class="skill-tag">Industrial MQTT</span>
+                <span class="skill-tag">FastAPI & Microservices</span>
+                <span class="skill-tag">Digital Twins (Three.js)</span>
+              </div>
+            </div>
+
+            <div class="about-section">
+              <h4>Pedagogical Philosophy</h4>
+              <p class="about-philosophy">
+                <strong>Lecture 2 Web Progression</strong>: Guiding students from fundamental browser APIs to stateful data-driven applications, building the intuition required for L3 backend integration.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Connect View -->
+        <section class="tab-pane" id="paneConnect">
+          <div class="pane-header">
+            <h2 class="pane-title">Get In Touch</h2>
+            <p class="pane-subtitle">Connect for AIoT research, curriculum inquiries, and collaboration.</p>
+          </div>
+          <div class="connect-links">
+            <a href="https://github.com/AWEOFIJ" target="_blank" rel="noopener noreferrer" class="connect-card">
+              <div class="connect-icon-box">💻</div>
+              <div class="connect-info">
+                <div class="connect-name">GitHub</div>
+                <div class="connect-meta">@AWEOFIJ • Open Source & AIoT Repositories</div>
+              </div>
+              <span class="connect-arrow">↗</span>
+            </a>
+
+            <a href="mailto:aweofij@example.edu.tw" class="connect-card">
+              <div class="connect-icon-box">✉️</div>
+              <div class="connect-info">
+                <div class="connect-name">Academic Email</div>
+                <div class="connect-meta">aweofij@example.edu.tw</div>
+              </div>
+              <span class="connect-arrow">↗</span>
+            </a>
+
+            <a href="https://linkedin.com/in/aweofij" target="_blank" rel="noopener noreferrer" class="connect-card">
+              <div class="connect-icon-box">💼</div>
+              <div class="connect-info">
+                <div class="connect-name">LinkedIn</div>
+                <div class="connect-meta">Professional Profile & Updates</div>
+              </div>
+              <span class="connect-arrow">↗</span>
+            </a>
+
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="connect-card course-highlight">
+              <div class="connect-icon-box">🎓</div>
+              <div class="connect-info">
+                <div class="connect-name">AIoT 2026 Course Portal</div>
+                <div class="connect-meta">Lecture 2 (L2Web) • Materials & Assignments</div>
+              </div>
+              <span class="connect-arrow">↗</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <!-- Zen Mode Exit Prompt -->
+    <div class="zen-exit-hint" id="zenExitHint">
+      Press <kbd>ESC</kbd> or <kbd>Z</kbd> to exit Zen mode
+    </div>
+
+    <!-- Toast Notification Banner -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- Shortcuts Footer -->
+    <footer class="shortcuts-footer" id="shortcutsFooter">
+      <span>Shortcuts: <kbd>S</kbd> Calibrate stdtime • <kbd>Z</kbd> Zen Mode • <kbd>T</kbd> 12/24H • <kbd>C</kbd> Copy Time • <kbd>ESC</kbd> Close Drawer</span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "edge-vision-defect-detection",
+    "title": "Edge AI Industrial Vision Inspection",
+    "category": "Edge Computing",
+    "badge": "Featured",
+    "description": "Real-time surface defect inspection pipeline deploying optimized YOLOv8 on NVIDIA Jetson Orin Nano with TensorRT acceleration and sub-12ms inference.",
+    "techStack": ["YOLOv8", "TensorRT", "Jetson Orin", "Python", "MQTT"],
+    "githubUrl": "https://github.com/AWEOFIJ",
+    "demoUrl": "#"
+  },
+  {
+    "id": "tinyml-environmental-sensor-node",
+    "title": "TinyML Low-Power Environmental Node",
+    "category": "TinyML & Sensors",
+    "badge": "Hardware",
+    "description": "Ultra-low power anomaly detection sensor node built on ESP32-S3 and BME680, transmitting telemetry over LoRaWAN with 18-month battery autonomy.",
+    "techStack": ["ESP32-S3", "TensorFlow Lite Micro", "LoRaWAN", "FreeRTOS", "C++"],
+    "githubUrl": "https://github.com/AWEOFIJ",
+    "demoUrl": "#"
+  },
+  {
+    "id": "digital-twin-factory-dashboard",
+    "title": "Smart Factory Digital Twin & Telemetry",
+    "category": "AIoT Platforms",
+    "badge": "System",
+    "description": "Three.js digital twin visualization platform coupled with an event-driven MQTT broker and TimescaleDB for live industrial sensor monitoring.",
+    "techStack": ["FastAPI", "TimescaleDB", "MQTT", "Three.js", "WebSocket"],
+    "githubUrl": "https://github.com/AWEOFIJ",
+    "demoUrl": "#"
+  },
+  {
+    "id": "ble-mesh-indoor-positioning",
+    "title": "BLE Mesh Asset Tracking & Positioning",
+    "category": "Wireless Networks",
+    "badge": "Research",
+    "description": "Indoor RSSI fingerprinting and trilateration engine across a multi-hop Bluetooth Low Energy mesh network achieving 1.2m localization accuracy.",
+    "techStack": ["BLE 5.2", "Zephyr RTOS", "Python", "NumPy", "Kalman Filter"],
+    "githubUrl": "https://github.com/AWEOFIJ",
+    "demoUrl": "#"
+  }
+]
