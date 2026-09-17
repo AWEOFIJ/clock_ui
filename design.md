@@ -145,6 +145,19 @@ Translates raw meteorological codes into icons and human-readable text:
 - Tab navigation to effortlessly switch between **Projects**, **About**, and **Connect**.
 - Responsive layout: Full-screen modal on mobile devices (<640px), 480px side drawer on desktop.
 
+### 5.4 Mobile Adaptations (`@media (max-width: 600px)`)
+The card is laid out for one narrow column; the rules below keep every element inside its own rounded container down to 360px.
+
+| Element | Mobile behaviour |
+|---|---|
+| `.clock-display-container` | `max-width: 100%` (the desktop 290px cap left the sync bar and subbar ~45px too narrow) |
+| `.sync-banner` | Stacks label over metrics (`flex-direction: column`, 16px radius); pills and label are `white-space: nowrap`, metrics wrap between pills, never inside one |
+| `.clock-subbar` | Wraps between items with the `.divider-dot` separators hidden — "UNIX / ms" on one line, "Source" on the next, instead of each value breaking mid-string |
+| `.portal-nav` / `.portal-btn` | `flex: 1 1 auto` + centred labels: Projects / About / Connect share one row at ≥375px, and the wrap to two rows (Connect full width) still reads as deliberate at 360px |
+| `.top-nav` | 40px icon buttons, tighter weather pill, so the row never collides with the weather badge |
+| `.time-label` | 0.68rem (≈10.9px) instead of 0.62rem (9.9px) |
+| `.toggle-pill`, `.action-btn`, `.portal-btn`, `.sync-now-btn`, drawer tabs | Raised to 34–40px min-height for touch |
+
 ---
 
 ## 6. Procedural Audio Engine (Web Audio API)

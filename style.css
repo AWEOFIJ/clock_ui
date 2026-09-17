@@ -1526,25 +1526,131 @@ kbd {
     font-size: 0.8rem;
   }
 
+  .top-nav {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .weather-pill-btn {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    gap: 6px;
+  }
+
+  .nav-controls {
+    gap: 6px;
+  }
+
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* The 290px cap starved the sync banner and subbar, so their contents
+     spilled out of their rounded backgrounds. Let them use the card width. */
   .clock-display-container {
-    max-width: 290px;
+    max-width: 100%;
+    padding: 16px 14px;
+  }
+
+  /* Stack label / metrics instead of cramming one pill row */
+  .sync-banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 16px;
+  }
+
+  .sync-indicator {
+    justify-content: center;
+  }
+
+  .sync-label,
+  .sync-pill {
+    white-space: nowrap;
+  }
+
+  .sync-metrics {
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .sync-now-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
   }
 
   .time-num {
     font-size: 2.6rem;
   }
 
+  .time-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+  }
+
   .time-separator {
     font-size: 2.3rem;
   }
 
+  /* Wrap between items, never inside one */
+  .clock-subbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 2px;
+    padding: 6px 12px;
+  }
+
+  .clock-subbar > span {
+    white-space: nowrap;
+  }
+
+  .divider-dot {
+    display: none;
+  }
+
   .portal-nav {
     flex-wrap: wrap;
+    gap: 8px;
   }
 
   .portal-btn {
-    padding: 8px 14px;
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 9px 10px;
+    font-size: 0.78rem;
+    gap: 6px;
+    min-height: 40px;
+  }
+
+  .toggle-pill {
+    padding: 6px 12px;
+    min-height: 34px;
+  }
+
+  .action-btn {
+    min-height: 40px;
+  }
+
+  .toast-item {
+    max-width: calc(100vw - 32px);
     font-size: 0.8rem;
+  }
+
+  .drawer-header {
+    padding: 16px;
+  }
+
+  .drawer-tab {
+    padding: 8px 12px;
+    min-height: 36px;
+  }
+
+  .close-drawer-btn {
+    width: 40px;
+    height: 40px;
   }
 
   .drawer-panel {
