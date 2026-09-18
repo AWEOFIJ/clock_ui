@@ -12,8 +12,6 @@ Built as the Lecture 2 teaching reference for the AIoT course, it walks the whol
 
 > Browser → HTML/CSS → JavaScript → Fetch API / JSON → DOM Manipulation → LocalStorage → GitHub Pages
 
-![clock_ui](docs/screenshot.png)
-
 ---
 
 ## Features
